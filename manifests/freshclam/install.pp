@@ -1,4 +1,4 @@
-class clamav::install inherits clamav::server {
+class clamav::freshclam::install inherits clamav::freshclam {
 
   if($clamav::server::manage_package)
   {

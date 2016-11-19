@@ -1,4 +1,4 @@
-class clamav::server::service inherits clamav::server {
+class clamav::freshclam::service inherits clamav::freshclam {
 
   #
   validate_bool($clamav::server::manage_docker_service)
