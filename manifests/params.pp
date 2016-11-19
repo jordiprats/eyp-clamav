@@ -1,8 +1,9 @@
 class clamav::params {
 
-  $package_name = 'clamav'
-  $service_name = 'clamav'
+  $server_service_name = 'clamavd'
+  $freshclam_service_name = ''
 
+  $package_name = 'clamav'
   $server_package_name = 'clamav-server'
   $freshclam_package_name = 'clamav-update'
 

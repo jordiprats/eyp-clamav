@@ -15,7 +15,7 @@ class clamav::server::service inherits clamav::server {
   {
     if($clamav::server::manage_service)
     {
-      service { $clamav::server::params::service_name:
+      service { $clamav::params::server_service_name:
         ensure => $clamav::server::service_ensure,
         enable => $clamav::server::service_enable,
       }
