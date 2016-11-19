@@ -14,4 +14,6 @@ class clamav::server(
   class { '::clamav::server::service': } ->
   Class['::clamav::server']
 
+  fail('TODO')
+
 }
