@@ -16,4 +16,12 @@ class clamav::freshclam::config inherits clamav::freshclam {
     content => template("${module_name}/freshclam/freshclamconf.erb"),
   }
 
+  file { $freshclam_sysconfig:
+    ensure  => 'present',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template($freshclam_sysconfig_template),
+  }
+
 }

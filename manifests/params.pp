@@ -15,6 +15,8 @@ class clamav::params {
       {
         /^[5-7].*$/:
         {
+          $freshclam_sysconfig='/etc/sysconfig/freshclam'
+          $freshclam_sysconfig_template="${module_name}/freshclam/sysconfig/rh.erb"
         }
         default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
       }
