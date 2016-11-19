@@ -9,11 +9,10 @@ class clamav::server(
 
   validate_re($package_ensure, [ '^present$', '^installed$', '^absent$', '^purged$', '^held$', '^latest$' ], 'Not a supported package_ensure: present/absent/purged/held/latest')
 
+  Class['::clamav'] ->
   class { '::clamav::server::install': } ->
   class { '::clamav::server::config': } ~>
   class { '::clamav::server::service': } ->
   Class['::clamav::server']
-
-  fail('TODO')
 
 }

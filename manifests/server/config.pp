@@ -1,3 +1,3 @@
-class clamav::config inherits clamav::server {
+class clamav::server::config inherits clamav::server {
 
 }
