@@ -8,6 +8,7 @@ class clamav::freshclam(
 
   include ::clamav
 
+  Class['::clamav'] ->
   class { '::clamav::freshclam::install': } ->
   class { '::clamav::freshclam::config': } ->
   Class['::clamav::freshclam']
