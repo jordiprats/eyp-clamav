@@ -4,7 +4,7 @@ class clamav::freshclam(
                           $mailto         = undef,
                           $maxattempts    = '5',
                           $dbchecks       = '24',
-                          $notify_clamd   = $clamd::server:clamconf,
+                          $notify_clamd   = $clamd::server::clamconf,
                         ) inherits clamav::params{
 
   validate_re($package_ensure, [ '^present$', '^installed$', '^absent$', '^purged$', '^held$', '^latest$' ], 'Not a supported package_ensure: present/absent/purged/held/latest')
