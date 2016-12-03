@@ -5,6 +5,10 @@ class clamav::server::install inherits clamav::server {
     package { $clamav::params::server_package_name:
       ensure => $clamav::server::package_ensure,
     }
+
+    package { $clamav::params::server_initscripts_package:
+      ensure => $clamav::server::package_ensure,
+    }
   }
 
 }
