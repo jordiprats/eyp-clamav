@@ -37,7 +37,7 @@ define clamav::server::instance(
     {
       if($clamav::params::systemd)
       {
-        service { "clamd@${service_name}":
+        service { "clamd@${instancename}":
           ensure  => $service_ensure,
           enable  => $service_enable,
           require => File["/etc/clamd.d/${instancename}.conf"],
