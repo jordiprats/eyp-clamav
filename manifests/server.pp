@@ -12,8 +12,6 @@ class clamav::server(
 
   #Class['::clamav'] ->
   class { '::clamav::server::install': } ->
-  class { '::clamav::server::config': } ~>
-  class { '::clamav::server::service': } ->
   Class['::clamav::server']
 
 }

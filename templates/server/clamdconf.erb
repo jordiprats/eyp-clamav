@@ -1,0 +1,20 @@
+# Use system logger.
+LogSyslog <%= scope.function_bool2yesno([@log_syslog]) %>
+
+# Specify the type of syslog messages - please refer to 'man syslog'
+# for facility names.
+LogFacility <%= @log_facility %>
+
+# This option allows you to save a process identifier of the listening
+# daemon (main thread).
+PidFile <%= @pidfile %>
+
+# Remove stale socket after unclean shutdown.
+# Default: disabled
+FixStaleSocket <%= scope.function_bool2yesno([@fix_stale_socket]) %>
+
+# Run as a selected user (clamd must be started by root).
+User <%= @user %>
+
+# Path to a local socket file the daemon will listen on.
+LocalSocket <%= @socket %>

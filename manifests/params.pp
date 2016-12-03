@@ -18,12 +18,14 @@ class clamav::params {
           $server_initscripts_package='clamav-server-sysvinit'
           $freshclam_sysconfig='/etc/sysconfig/freshclam'
           $freshclam_sysconfig_template="${module_name}/freshclam/sysconfig/rh.erb"
+          $systemd=false
         }
         /^7.*$/:
         {
           $server_initscripts_package='clamav-server-systemd'
           $freshclam_sysconfig='/etc/sysconfig/freshclam'
           $freshclam_sysconfig_template="${module_name}/freshclam/sysconfig/rh.erb"
+          $systemd=true
         }
         default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
       }
