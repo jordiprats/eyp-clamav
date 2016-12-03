@@ -11,22 +11,42 @@ define clamav::server::instance(
                                   $log_syslog            = true,
                                   $log_facility          = 'LOG_MAIL',
                                 ) {
-  #
-  clamav::server::instance::config { $instancename:
-    user             => $user,
-    pidfile          => $pidfile,
-    socket           => $socket,
-    fix_stale_socket => $fix_stale_socket,
-    log_syslog       => $log_syslog,
-    log_facility     => $log_facility,
-    require          => Class['::clamav::server'],
-  } ~>
 
-  clamav::server::instance::service { $instancename:
-    manage_service        => $manage_service,
-    manage_docker_service => $manage_docker_service,
-    service_ensure        => $service_ensure,
-    service_enable        => $service_enable,
+  validate_bool($manage_docker_service)
+  validate_bool($manage_service)
+  validate_bool($service_enable)
+
+  validate_re($service_ensure, [ '^running$', '^stopped$' ], "Not a valid daemon status: ${service_ensure}")
+
+  $is_docker_container_var=getvar('::eyp_docker_iscontainer')
+  $is_docker_container=str2bool($is_docker_container_var)
+
+  file { "/etc/clamd.d/${instancename}.conf":
+    ensure  => 'present',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/server/clamdconf.erb"),
+    require => Class['::clamav::server'],
+  }
+
+  if( $is_docker_container==false or
+      $manage_docker_service)
+  {
+    if($manage_service)
+    {
+      if($clamav::params::systemd)
+      {
+        service { "clamd@${service_name}":
+          ensure  => $service_ensure,
+          enable  => $service_enable,
+          require => File["/etc/clamd.d/${instancename}.conf"],
+        }
+      }
+      else {
+        fail('not implemented')
+      }
+    }
   }
 
 }
