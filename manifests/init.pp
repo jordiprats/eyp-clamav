@@ -9,4 +9,7 @@ class clamav(
   class { '::clamav::config': } ->
   Class['::clamav']
 
+  # SELinux?
+  # setsebool -P antivirus_can_scan_system 1
+
 }
